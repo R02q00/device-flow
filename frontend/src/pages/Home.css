@@ -1,0 +1,12 @@
+.circle{
+    width: 350px;
+    height: 350px;
+    border-radius:50%;
+    position: relative;
+    background-color:rgb(33, 62, 104);
+}
+img{
+    width: 90%;
+    position: absolute;
+    top: 50px;
+}

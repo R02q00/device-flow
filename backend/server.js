@@ -4,27 +4,24 @@ import cors from "cors";
 import db from "./models/model.js";
 import authRoutes from "./routers/auth.route.js";
 import userRoutes from "./routers/user.route.js";
- 
+
+const PORT= process.env.PORT || 5000
+
 const app = express();
 
-const corsOptions = {
-    origin: `http://localhost:${process.env.PORT}`,
+const crosOptions = {
+    origin: "http://localhost:5173",
 };
- 
-app.use(cors(corsOptions));
- 
-// Parse requests of content-type - application/json
+
+app.use(cors(crosOptions));
+
 app.use(express.json());
- 
-// Parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
- 
-// Simple route
+
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome to the Node.js JWT Authentication application." });
+    res.json({ message: "Backend is here" });
 });
- 
-// Routes
+
+
 app.use("/api/auth", authRoutes);
 app.use("/api/test", userRoutes);
  
@@ -41,9 +38,8 @@ db.sequelize.sync({force: false})
     .then( async() => {
         //active if first try
         // await initializeRoles();
-        app.listen(process.env.PORT, ()=>{
-            console.log(`Server running on port ${process.env.PORT}`);
-            
+        app.listen(PORT, ()=>{
+            console.log(`Server running on port ${PORT}`);
         })
     })
     .catch((error)=>{

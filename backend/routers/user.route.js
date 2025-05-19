@@ -1,15 +1,9 @@
-
 import express from "express";
-import {
-    allAccess,
-    userBoard,
-    moderatorBoard,
-    adminBoard,
-} from "../controllers/user.controller.js";
+import {allAccess, userBoard, moderatorBoard, adminBoard} from "../controllers/user.controller.js";
 import { authJwt } from "../middlewares/index.js";
  
 const router = express.Router();
- 
+
 // Public Route
 router.get("/all", allAccess);
  

@@ -1,4 +1,3 @@
-
 import db from "../models/model.js";
 import authConfig from "../config/auth.config.js";
 import jwt from "jsonwebtoken";
@@ -9,18 +8,19 @@ const Role = db.role;
  
 export const signup = async (req, res) => {
     try {
-        // Create new user
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const {username, email, password} = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({
-            username: req.body.username,
-            email: req.body.email,
+            username: username,
+            email: email,
             password: hashedPassword,
         });
  
         const role = await Role.findOne({ where: { name: "user" } });
+
         await user.setRoles([role]);
- 
-        res.status(201).json({ message: "User registered successfully!" });
+        res.status(201).json({ message: "User registered successfully!"});
+
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -28,19 +28,18 @@ export const signup = async (req, res) => {
  
 export const signin = async (req, res) => {
     try {
-        // Find user by username
+        const {username, password} = req.body;
         const user = await User.findOne({
             where: {
-                username: req.body.username,
+                username: username,
             },
         });
  
         if (!user) {
             return res.status(404).json({ message: "User Not found." });
         }
- 
-        // Validate password
-        const passwordIsValid = await bcrypt.compare(req.body.password, user.password);
+
+        const passwordIsValid = await bcrypt.compare(password, user.password);
  
         if (!passwordIsValid) {
             return res.status(401).json({
@@ -49,12 +48,10 @@ export const signin = async (req, res) => {
             });
         }
  
-        // Generate JWT
         const token = jwt.sign({ id: user.id }, authConfig.secret, {
             expiresIn: 86400, // 24 hours
         });
  
-        // Get user roles
         const roles = await user.getRoles();
         const authorities = roles.map((role) => `ROLE_${role.name.toUpperCase()}`);
  

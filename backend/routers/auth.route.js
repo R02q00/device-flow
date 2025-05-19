@@ -1,4 +1,3 @@
-
 import express from "express";
 import { signup, signin } from "../controllers/auth.controller.js";
 import { verifySignUp } from "../middlewares/index.js";

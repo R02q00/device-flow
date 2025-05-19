@@ -9,7 +9,6 @@ import './App.css'
 import Loan from './pages/loan';
 
 function App() {
-  
   return (
     <BrowserRouter>
       <Routes>
@@ -23,7 +22,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-
 }
 
 export default App

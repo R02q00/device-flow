@@ -1,14 +1,15 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import Validate from "./validate";
-export default function Signup() {
+import { api } from "../configApi/configs";
 
+export default function Signup() {
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
     const [message, setMessage] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [data, setData] = useState({
-        userName: '',
+        username: '',
         email: '',
         password: '',
     });
@@ -16,40 +17,49 @@ export default function Signup() {
         setData({...data, [e.target.name]: e.target.value});
 
     }
-    const handleSubmit = (e) =>{
+    const handleSubmit = async(e) =>{
         e.preventDefault();
         setErrors(Validate(data));
-        if (errors.userName==="" && errors.email==="" && errors.password==="") {
+        if (errors.username==="" && errors.email==="" && errors.password==="") {
             console.log(data);
-            navigate("/")
+            await api.post("/api/auth/signup", data)
+                .then(result => {
+                    console.log(result.data.message);
+                    navigate('/');
+                })
+                .catch(error =>{
+                    console.log(error.result?.message || error.message)
+                })
         }
+
     }
     return(
         <div className="mt-5">
-            <div className="max-w-md mx-auto p-10 bg-white rounded-lg shadow-md">
-                <div className="relative h-20 flex justify-center rounded-t-lg pt-5
-                bg-linear-to-t from-white to-gray-950 blur-[0.5px]">
-                    <h3 className="text-red-600 font-bold">DEVICE</h3>
-                    <h3 className="text-white font-bold">-FLOW</h3>
-                    <h1 className="absolute top-15 text-center">INSCRIPTION</h1>
+            <div className="max-w-md mx-auto p-10">
+                <div className="mb-2">
+                    <p className="font-bold text-center mb-2">
+                        <span className="text-red-500">DEVICE</span>
+                        <span className="text-gray-800">-FLOW</span>
+                    </p>
+                    <h1 className="text-gray-700 font-semibold">Create account</h1>
                 </div>
                 <form onSubmit={handleSubmit}>
 
                     {/*Username*/}
                     <div className="mb-2">
-                        <label htmlFor="userName" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
                             Username
                         </label>
                         <input
                             type="text"
-                            id="userName"
-                            name="userName"
-                            value={data.userName}
+                            id="username"
+                            name="username"
+                            value={data.username}
                             onChange={handleChange}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md
                             focus:outline-none focus:ring-2 focus:ring-gray-400"
                         />
-                        {errors.userName && <span className="text-sm text-red-400">{errors.userName}</span>}
+                        {errors.username && <span className="text-sm text-red-400">{errors.username}</span>}
                     </div>
 
                     {/*email*/}
@@ -92,7 +102,7 @@ export default function Signup() {
                             id="showPassword"
                             onClick={() => setShowPassword(!showPassword)}
                         />
-                        <label htmlFor="showPassword" className="text-sm text-gray-600 hover:text-gray-800">
+                        <label htmlFor="showPassword" className="text-sm text-gray-600 hover:text-gray-800 cursor-pointer">
                             Afficher mot de passe ?
                         </label>
                     </div>
@@ -107,7 +117,7 @@ export default function Signup() {
                     </button>
 
                 </form>
-                <p className="text-sm text-gray-500 mt-4 text-center">
+                <p className="text-sm text-gray-500 mt-4">
                     Have an account !
                     <button 
                         className="text-blue-500 font-semibold ml-1"

@@ -3,13 +3,13 @@ function Validate(values){
     const nom_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/
 
-    if(values.userName===""){
-        error.userName="Saisir votre nom d'utilisateur !"
+    if(values.username===""){
+        error.username="Saisir votre nom d'utilisateur !"
     }
     //else if(!nom_pattern.test(values.nom)){
        // error.nom="Nom incorrect"}
     else{
-        error.userName=""
+        error.username=""
     }
     
     if (values.email==="") {

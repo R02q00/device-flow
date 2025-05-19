@@ -1,4 +1,3 @@
-// config/auth.config.js
 export default {
-    secret: "your-very-secure-secret-key",
+    secret: "secure-secret-key@R02q00",
 };

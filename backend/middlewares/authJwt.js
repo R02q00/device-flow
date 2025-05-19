@@ -1,4 +1,3 @@
-// app/middlewares/authJwt.js
 import jwt from "jsonwebtoken";
 import db from "../models/model.js";
 import authConfig from "../config/auth.config.js";
@@ -12,7 +11,7 @@ const verifyToken = (req, res, next) => {
         return res.status(403).json({ message: "No token provided!" });
     }
  
-    const actualToken = token.startsWith("Bearer ")
+    const actualToken = token.startsWith("Bearer")
         ? token.slice(7, token.length)
         : token;
  

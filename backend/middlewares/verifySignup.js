@@ -1,6 +1,4 @@
-// app/middlewares/verifySignUp.js
 import db from "../models/model.js";
- 
 const ROLES = db.ROLES;
 const User = db.user;
  

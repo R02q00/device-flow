@@ -1,19 +1,43 @@
 import { Outlet, Link ,NavLink, useNavigate} from "react-router-dom";
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {MdDashboard} from "react-icons/md"
 import { FiSearch} from "react-icons/fi"
 import {FaList, FaHands} from "react-icons/fa"
 import { IoHelp } from "react-icons/io5"
 import './Layout.css';
+import { api } from "../configApi/configs";
+import Signin from "../Authentification/signin";
+import axios from "axios";
 
 const Layout = () => {
     const navigate = useNavigate();
-    return(
-          <div className="w-full h-[100vh] bg-base-100 flex flex-col justify-center item-center gap-30">
+    const [tokenStatus, setTokenStatus]= useState(false);
+    const token = localStorage.getItem("token");
+    const getAcces = async() =>{
+        await api.get("/api/test/user", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+            .then(result => {
+                console.log(result.data)
+                setTokenStatus(!tokenStatus);
+                navigate("/home")
+            })
+            .catch(error => {
+                console.log(error.result?.message || error.message)
+            })
+    }
+    useEffect(()=>{
+        getAcces();
+    }, [])
+    const Navigation = () => {
+        return(
+            <div className="w-full h-[100vh] bg-base-100 flex flex-col justify-center item-center gap-30">
               {/* title */}
               <div className='w-full flex flex-col items-center gap-10'>
                   <p className='text-xl text-gray-800 text-center font-bold pointer-events-none'>Welcome to <span className="text-red-500">DEVICE</span><span>-FLOW</span></p>
-                  <div className="relative w-[75%]">
+                  <div className="relative w-[60%]">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-evetns-none">
                           <FiSearch className='text-gray-400'/>
                       </div>
@@ -72,8 +96,21 @@ const Layout = () => {
                   </div>
               </div>
           </div>
-
+        );
+    }
+    return(
+        <>
+            {
+                tokenStatus ? <Navigation />  : 
+                
+                <div className="flex flex-col justify-center items-center">
+                    <p>Veuillez vous connecter !</p>
+                    <button  className="text-white bg-gray-950 px-4 py-1 rounded-lg"
+                        onClick={()=> navigate('/')}
+                    >log in</button>
+                </div>
+            }
+        </> 
     )
 }
-
 export default Layout

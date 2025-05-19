@@ -7,6 +7,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
     dialect: dbConfig.dialect,
     pool: dbConfig.pool,
+    logging: false,
 });
  
 const db = {};
@@ -21,5 +22,5 @@ db.role.belongsToMany(db.user, { through: "user_roles" });
 db.user.belongsToMany(db.role, { through: "user_roles", as: "roles" });
  
 db.ROLES = ["user", "admin", "moderator"];
- 
+
 export default db;

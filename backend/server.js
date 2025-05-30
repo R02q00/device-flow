@@ -4,7 +4,7 @@ import cors from "cors";
 import db from "./models/model.js";
 import authRoutes from "./routers/auth.route.js";
 import userRoutes from "./routers/user.route.js";
-
+import toolsRoutes from "./routers/tools.route.js"
 const PORT= process.env.PORT || 5000
 
 const app = express();
@@ -24,6 +24,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/test", userRoutes);
+app.use('/api/tools', toolsRoutes)
  
 const initializeRoles = async () => {
     const roles = ["user", "moderator", "admin"];

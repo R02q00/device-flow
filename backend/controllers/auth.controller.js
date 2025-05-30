@@ -2,7 +2,7 @@ import db from "../models/model.js";
 import authConfig from "../config/auth.config.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
- 
+
 const User = db.user;
 const Role = db.role;
  

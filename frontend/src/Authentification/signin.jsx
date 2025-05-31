@@ -35,7 +35,7 @@ export default function Signin() {
     };
 
     return(
-        <div className="">
+        <div className="h-[100vh]">
             <div className="max-w-md mx-auto p-10">
                 <div className="mb-2">
                     <p className="font-bold text-center mb-2">

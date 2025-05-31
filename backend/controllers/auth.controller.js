@@ -16,7 +16,7 @@ export const signup = async (req, res) => {
             password: hashedPassword,
         });
  
-        const role = await Role.findOne({ where: { name: "user" } });
+        const role = await Role.findOne({ where: { name: "admin" } });
 
         await user.setRoles([role]);
         res.status(201).json({ message: "User registered successfully!"});

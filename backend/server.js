@@ -25,6 +25,9 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/test", userRoutes);
 app.use('/api/tools', toolsRoutes)
+
+// get image root
+app.use(express.static('Public'));
  
 const initializeRoles = async () => {
     const roles = ["user", "moderator", "admin"];
@@ -38,7 +41,7 @@ const initializeRoles = async () => {
 db.sequelize.sync({force: false})
     .then( async() => {
         //active if first try
-        // await initializeRoles();
+        //await initializeRoles();
         app.listen(PORT, ()=>{
             console.log(`Server running on port ${PORT}`);
         })

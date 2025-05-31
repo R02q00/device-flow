@@ -110,8 +110,8 @@ export default function Signup() {
                     {/*button submit*/}
                     <button
                         type="submit"
-                        className="w-full bg-gray-950 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition duration-200 
-                        focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                        className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-200 
+                        focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-offset-2"
                     >
                         Signup
                     </button>

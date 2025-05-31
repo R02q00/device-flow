@@ -29,13 +29,13 @@ export const getTools = (req, res) => {
 };
 
 export const createTools = (req, res) => {
-    const {sequence_number, name, statut} = req.body;
-    const photoPath = req.file ? req.file.path: null;
+    const {sequence_number, name} = req.body;
+    const photoPath = req.file ? req.file.path : null;
     Tools.create({
         sequence_number: sequence_number,
         name: name,
         photo: photoPath,
-        statut: statut,
+        statut: 'good',
     })
     .then(result=>{
         console.log('Tools created');
@@ -48,7 +48,7 @@ export const createTools = (req, res) => {
 export const updateTools = (req, res, next) => {
     const toolsId = req.params.toolsId;
     const {name, statut} = req.body;
-    const photoPath = req.file ? req.file.path: null;
+    const photoPath = req.file ? req.file.path : null;
     Tools.findByPk(toolsId)
     .then(tools=>{
         if(!tools){

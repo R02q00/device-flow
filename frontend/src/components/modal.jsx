@@ -4,7 +4,7 @@ import {CiImageOn} from "react-icons/ci"
 import { api } from "../configApi/configs";
 
 
-const Modal = ({mode, isOpen, onClose}) => {
+const Modal = ({mode, refresh, isOpen, onClose}) => {
   const toolsId = ""
   const [selected, setSelected] = useState("")
   const options = [
@@ -16,7 +16,7 @@ const Modal = ({mode, isOpen, onClose}) => {
     sequence_number: '',
     name: '',
     photo: '',
-    statut: 'good',
+    statut: '',
   })
   const handleChange = (e) => {
     setData({...data, [e.target.name]: e.target.value})
@@ -25,11 +25,13 @@ const Modal = ({mode, isOpen, onClose}) => {
       event.preventDefault();
       if (mode === 'add') {
         console.log(data)
-        /*await api.post('api/tools/', data)
+        await api.post('api/tools/', data)
           .then(result =>{
-              console.log(result);
+              console.log(result.data.message);
+              onClose();
+              refresh();
           })
-          .catch(error => console.log(error.result?.message || error.message))*/
+          .catch(error => console.log(error.result?.message || error.message));
 
       }else{
         console.log(data);

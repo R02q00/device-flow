@@ -17,6 +17,7 @@ export default function Device({}) {
     };
     const [data, setData] = useState([]);
     const [selectedIds, setSelectedIds] = useState([]);
+    const [selectedId, setSelectedId] = useState(0);
 
     const handleSelectedChecked = (value) =>{
         const id = parseInt(value, 10)
@@ -36,7 +37,9 @@ export default function Device({}) {
             await api.delete(`api/tools/${id}`)
                 .then(result => {
                     console.log(result.data)
+                    setSelectedIds([]);
                     getAlltools();
+
                 })
                 .catch(error => console.log(error.result?.message || error.message))
         }
@@ -108,7 +111,7 @@ export default function Device({}) {
                         </td>
                         <td>{value.statut}</td>
                         <td className="flex items-center justify-center py-6">
-                            <MdEditNote onClick={()=>{handleOpen('edit')}} className="text-xl text-indigo-600 cursor-pointer active:text-indigo-700"/>
+                            <MdEditNote onClick={()=>{handleOpen('edit'), setSelectedId(value.id)}} className="text-xl text-indigo-600 cursor-pointer active:text-indigo-700"/>
                         </td>
                         </tr>
                     ))
@@ -120,7 +123,7 @@ export default function Device({}) {
         <div className="absolute bottom-5 right-2 p-2 bg-indigo-500 rounded-full hover:cursor-pointer active:bg-indigo-700">
             <Add className="text-white text-2xl" onClick={()=>{handleOpen('add')}}/>
         </div>
-        {isOpen ? <Modal mode={mode} refresh={getAlltools} isOpen={isOpen} onClose={()=>{setIsOpen(false)}}/> : null}
+        {isOpen ? <Modal mode={mode} id={selectedId} refresh={getAlltools} isOpen={isOpen} onClose={()=>{setIsOpen(false)}}/> : null}
       </div>
     );
 }

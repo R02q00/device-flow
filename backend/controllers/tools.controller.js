@@ -21,7 +21,7 @@ export const getTools = (req, res) => {
     Tools.findByPk(toolsId)
         .then( tools => {
             if(!tools){
-                return res.status(404).json({message: 'tools not found'});
+                return res.status(404).json({message: 'Tools not found'});
             }
             res.status(200).json({tools: tools})
         })
@@ -30,7 +30,7 @@ export const getTools = (req, res) => {
 
 export const createTools = (req, res) => {
     const {sequence_number, name} = req.body;
-    const photoPath = req.file ? req.file.path : null;
+    const photoPath = req.file ? req.file.filename : null;
     Tools.create({
         sequence_number: sequence_number,
         name: name,
@@ -47,22 +47,23 @@ export const createTools = (req, res) => {
 
 export const updateTools = (req, res, next) => {
     const toolsId = req.params.toolsId;
-    const {name, statut} = req.body;
-    const photoPath = req.file ? req.file.path : null;
+    const {sequence_number,name, statut} = req.body;
+    const photoPath = req.file ? req.file.filename : null;
     Tools.findByPk(toolsId)
     .then(tools=>{
         if(!tools){
-            return res.status(404).json({message: 'tools not found !'})
+            return res.status(404).json({message: 'Tools not found !'})
         }
         const photoCourant = tools.photo;
         const photo = photoPath || photoCourant;
         if(photoCourant && photoPath){
-            const imageAncien=path.join(__dirname, './../Public/Images', imageCourant);
+            const imageAncien = path.join(__dirname, '../Public/tools', imageCourant);
             fs.unlink(imageAncien, (unlinkErr)=>{
-                console.error("Erreur est survenu lors de suppression imaage:", unlinkErr)
+                console.error("Something was error", unlinkErr)
             })
         }
 
+        tools.sequence_number =sequence_number;
         tools.name = name;
         tools.statut = statut;
         tools.photo = photo;
@@ -71,7 +72,8 @@ export const updateTools = (req, res, next) => {
 
     })
     .then(result => {
-        res.status(200).json({message: 'Tools updated !', tools: result})
+        console.log('Tools updated')
+        res.status(200).json({message: 'Tools updated successfully !', tools: result})
     })
     .catch(error => console.log(error));
 
@@ -95,3 +97,4 @@ export const deleteTools = (req, res, next) => {
         })
         .catch(error => console.log(error));
 }
+

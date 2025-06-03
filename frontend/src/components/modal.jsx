@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import {BsUpload} from "react-icons/bs"
 import {CiImageOn} from "react-icons/ci"
 import { api } from "../configApi/configs";
 
 
-const Modal = ({mode, refresh, isOpen, onClose}) => {
-  const toolsId = ""
+const Modal = ({mode, refresh, id, isOpen, onClose}) => {
   const [selected, setSelected] = useState("")
   const options = [
     {label: "fix"},
@@ -21,6 +19,17 @@ const Modal = ({mode, refresh, isOpen, onClose}) => {
   const handleChange = (e) => {
     setData({...data, [e.target.name]: e.target.value})
   }
+
+  const getTools = async() => {
+      await api.get(`api/tools/${id}`)
+        .then(result => {
+            setData({...data, sequence_number: result.data.tools.sequence_number, name:result.data.tools.name,
+              statut:result.data.tools.statut
+            })
+        })
+
+  }
+
   const handleSubmit = async(event) =>{
       event.preventDefault();
       if (mode === 'add') {
@@ -35,33 +44,37 @@ const Modal = ({mode, refresh, isOpen, onClose}) => {
 
       }else{
         console.log(data);
-        /*await api.post(`api/tools/:${toolsId}`, data)
+        await api.put(`api/tools/${id}`, data)
           .then(result => {
-              console.log(result.data);
+              console.log(result.data.message);
+              onClose();
+              refresh();
           })
-          .catch(error => console.log(error.result?.message || error.message))*/
+          .catch(error => console.log(error.result?.message || error.message));
 
       }
   }
 
   useEffect(() => {
-    
-  },[])
+    if(mode==='edit'){
+      getTools();
+    }
+  }, [id])
 
   return(
       <dialog className="modal" open={isOpen}>
         <div className="modal-box">
           <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={onClose}>✕</button>
-          <h3 className="text-2xl text-indigo-500 mb-2">{mode === "add" ? "New tools": "Edit tools"}</h3>
+          <h3 className="text-xl text-indigo-500 mb-2">{mode === "add" ? "New tools": "Edit tools"}</h3>
           <form action="" onSubmit={handleSubmit}>
             <div className="flex flex-col mb-4">
-              <label htmlFor="sequence_number" className="text-md font-700">Sequence number:</label>
+              <label htmlFor="sequence_number" className="text-sm font-700">Sequence number:</label>
               <input type="text" name="sequence_number" placeholder="Sequence number" className="w-full border border-indigo-500 rounded-md p-2 focus:outline-none"
                 value={data.sequence_number} onChange={handleChange}
               />
             </div>
             <div className="flex flex-col mb-4">
-              <label htmlFor="name" className="text-md font-700">Name:</label>
+              <label htmlFor="name" className="text-sm font-700">Name:</label>
               <input type="text" name="name" placeholder="Name" className="w-full rounded-md border border-indigo-500 p-2 focus:outline-none"
                 value={data.name} onChange={handleChange}
               />
@@ -80,8 +93,9 @@ const Modal = ({mode, refresh, isOpen, onClose}) => {
             {
               mode ==='edit' ?
                 <div className="flex flex-col gap-1 mb-15">
-                  <label>Choice statut tools:</label>
+                  <label>Choice tools statut :</label>
                   <select className="w-full rounded-md border border-indigo-500 p-3 focus:outline-none"
+                    value={data.statut}
                     onChange={(e) => setData({...data, statut: e.target.value})}
                   >
                     {
@@ -94,8 +108,10 @@ const Modal = ({mode, refresh, isOpen, onClose}) => {
               : null
             }
             
-            <div className="">
-                <button className="text-white font-700 bg-green-300 px-8 py-2 rounded-md">Save</button>
+            <div className="flex justify-end gap-2">
+                <button className="text-white font-[500] bg-gray-400 px-4 py-1 rounded-md hover:bg-gray-500 cursor-pointer"
+                onClick={onClose}>Cancel</button>
+                <button className="text-white font-[500] bg-indigo-500 px-5 py-1 rounded-md hover:bg-indigo-600 cursor-pointer">Save</button>
             </div>
           </form>
         </div>

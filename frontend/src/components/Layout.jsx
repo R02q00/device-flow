@@ -21,6 +21,7 @@ const Layout = () => {
             })
             .catch(error => {
                 console.log(error.result?.message || error.message)
+                navigate('/')
             })
     }
     useEffect(()=>{
@@ -31,7 +32,7 @@ const Layout = () => {
     return(
         <>
             {
-                tokenStatus ? <Navigation/>  : <Signin />
+                tokenStatus ? <Navigation/>  : navigate('/home')
             }
         </> 
     )

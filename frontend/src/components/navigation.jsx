@@ -11,7 +11,6 @@ const Navigation = () => {
         <div className="w-full h-[100vh] bg-base-100 flex flex-col justify-center item-center gap-30">
               {/* title */}
               <div className='relative flex flex-col items-center gap-10'>
-                  <div className="status bg-red-500 animate-bounce absolute"></div>
                   <p className='text-xl text-gray-800 text-center font-bold pt-2 pointer-events-none'>Welcome to <span className="text-red-500">DEVICE</span><span>-FLOW</span></p>
                   <div className="relative w-[60%]">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-evetns-none">
@@ -29,7 +28,7 @@ const Navigation = () => {
               </div>
               
               {/* card */}
-              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-5">
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-5 lg:px-30">
                   <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                       <div className="flex flex-col justify-center items-center gap-2 cursor-pointer"
                         onClick={()=> navigate('/dashboard')}

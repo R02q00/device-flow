@@ -8,7 +8,7 @@ export default function Loan({}) {
     }
     return(
         <div className="">
-            <Back href={"home"} title={"Loan a tools"}/>
+            <Back href={"home"} title={"Loan a device"}/>
             <div className='flex justify-end px-2'>
                 <button className='text-xs text-white bg-indigo-500 rounded-sm px-2 py-1 hover:bg-indigo-600 cursor-pointer'
                     onClick={()=> handleOpen()}

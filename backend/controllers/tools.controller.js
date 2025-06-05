@@ -25,7 +25,23 @@ export const getTools = (req, res) => {
             }
             res.status(200).json({tools: tools})
         })
-        .catch(err => console.log(err));
+        .catch(error => console.log(error));
+};
+
+export const getToolsActive = (req, res) => {
+    Tools.findOne({
+        where:{
+            statut: 'good',
+        }
+    })
+    .then(tools => {
+        if(!tools){
+            return res.status(404).json({message: 'Tools not found'});
+        }
+        res.status(200).json({tools: tools})
+    })
+    .catch(error => console.log(error))
+
 };
 
 export const createTools = (req, res) => {

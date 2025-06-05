@@ -34,9 +34,7 @@ function Graphic({reload = false}){
       };
 
     return (
-      <div className='bg-white rounded-lg'>
         <Pie data={data} options={options} />
-      </div>
     );
 
 }

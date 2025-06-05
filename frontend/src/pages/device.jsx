@@ -81,8 +81,7 @@ export default function Device({}) {
                 </tr>
             </thead>
             <tbody>
-                {   data.length === 0 ? 
-                    <tr><td>No tools for moment</td></tr> :
+                {   data.length === 0 ? <tr><td>No device for moment</td></tr> :
                     data.map((value) => (
                         <tr key={value.id}>
                         <td>

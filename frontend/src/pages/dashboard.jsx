@@ -11,10 +11,12 @@ export default function Dashboard({}) {
                 <h3 className="font-500 pointer-event-none">Statistiques des donnees</h3>
             </div>
             <Card/>
-            <div className="grid grid-cols-2 px-1 gap-1">
-                <Graphic />
-                <div className="bg-white rounded-lg">
-
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 px-1 gap-2">
+                <div className="bg-white">
+                    <Graphic />
+                </div>
+                <div className="bg-white rounded-lg px-2 py-1">
+                    <h1>List user</h1>
                 </div>
             </div>
         </div>

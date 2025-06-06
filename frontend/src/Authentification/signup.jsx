@@ -57,7 +57,7 @@ export default function Signup() {
                             value={data.username}
                             onChange={handleChange}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md
-                            focus:outline-none focus:ring-2 focus:ring-gray-400"
+                            focus:outline-none "
                         />
                         {errors.username && <span className="text-sm text-red-400">{errors.username}</span>}
                     </div>
@@ -75,7 +75,7 @@ export default function Signup() {
                             value={data.email}
                             onChange={handleChange}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md
-                            focus:outline-none focus:ring-2 focus:ring-gray-400"
+                            focus:outline-none"
                         />
                         {errors.email && <span className="text-sm text-red-400">{errors.email}</span>}
                     </div>
@@ -92,7 +92,7 @@ export default function Signup() {
                             value={data.password}
                             onChange={handleChange}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md
-                            focus:outline-none focus:ring-2 focus:ring-gray-400"
+                            focus:outline-none"
                         />
                         {errors.password && <span className="text-sm text-red-400">{errors.password}</span>}
                     </div>
@@ -111,7 +111,7 @@ export default function Signup() {
                     <button
                         type="submit"
                         className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-200 
-                        focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-offset-2"
+                        focus:outline-none"
                     >
                         Signup
                     </button>
@@ -120,7 +120,7 @@ export default function Signup() {
                 <p className="text-sm text-gray-500 mt-4">
                     Have an account !
                     <button 
-                        className="text-blue-500 font-semibold ml-1"
+                        className="text-sm text-indigo-500  ml-1"
                         onClick={()=> navigate('/')}
                     >
                         Log in

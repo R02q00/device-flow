@@ -1,11 +1,11 @@
-
 import Back from "../components/back";
 import {IoIosAdd as Add} from "react-icons/io"
 import Modal from "../components/modal";
 import { useEffect, useState } from "react";
 import { api } from "../configApi/configs";
 import { CiTrash } from "react-icons/ci";
-import { MdEditNote, MdFilterList } from "react-icons/md";
+import { MdEditNote} from "react-icons/md";
+import {HiDotsVertical} from 'react-icons/hi'
 
 
 export default function Device({}) {
@@ -64,7 +64,7 @@ export default function Device({}) {
             {
                 selectedIds.length !== 0 ? <CiTrash className="text-xl text-red-500 rounded-sm hover:bg-red-100 hover:cursor-pointer active:text-red-600" onClick={() => {handleDelete()}}/> : null
             }
-            <MdFilterList className="text-xl text-gray-500 rounded-sm hover:bg-gray-100 hover:cursor-pointer active:text-gray-700"/>
+            <HiDotsVertical className="text-xl text-indigo-500 rounded-sm hover:bg-gray-100 hover:cursor-pointer active:text-indigo-700"/>
         </div>
         <div className="overflow-x-auto">
             <table className="table">
@@ -94,14 +94,14 @@ export default function Device({}) {
                             </label>
                         </td>
                         <td>
-                            <div className="flex items-center gap-3">
-                            <div className="avatar">
-                                <div className="mask mask-squircle h-12 w-12">
-                                <img
-                                    src={`http://localhost:3000/tools/${value.photo}`}
-                                    alt="tools photo" />
+                            <div className="flex items-center">
+                                <div className="avatar">
+                                    <div className="mask mask-squircle h-12 w-12">
+                                    <img
+                                        src={`http://localhost:3000/Public/tools/${value.photo}`}
+                                        alt="tools photo" />
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                         </td>
                         <td>{value.sequence_number}</td>
@@ -119,7 +119,7 @@ export default function Device({}) {
             </table>
         </div>
         {/* section modal */}
-        <div className="absolute bottom-5 right-2 p-2 bg-indigo-500 rounded-full hover:cursor-pointer active:bg-indigo-700">
+        <div className="absolute bottom-2 right-2 p-2 bg-indigo-500 rounded-full hover:cursor-pointer active:bg-indigo-700">
             <Add className="text-white text-2xl" onClick={()=>{handleOpen('add')}}/>
         </div>
         {isOpen ? <Modal mode={mode} id={selectedId} refresh={getAlltools} isOpen={isOpen} onClose={()=>{setIsOpen(false)}}/> : null}

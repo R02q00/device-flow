@@ -58,7 +58,7 @@ export default function Signin() {
                                 value={data.username}
                                 onChange={handleChange}
                                 className="w-full px-3 py-2 border border-gray-300 rounded-md
-                                focus:outline-none focus:ring-2 focus:ring-gray-400"
+                                focus:outline-none "
                             />
                             {errors.username && <span className="text-sm text-red-400">{errors.username}</span>}
                         </div>
@@ -75,7 +75,7 @@ export default function Signin() {
                                     value={data.password}
                                     onChange={handleChange}
                                     className="w-full px-3 py-2 border border-gray-300 rounded-md
-                                    focus:outline-none focus:ring-2 focus:ring-gray-400"
+                                    focus:outline-none "
                                 />
                             {errors.password && <span className="text-sm text-red-400">{errors.password}</span>}
                         </div>
@@ -93,16 +93,16 @@ export default function Signin() {
                         <button
                             type="submit"
                             className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-200 
-                            focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         >
                             Signin
                         </button>
 
                     </form>
-                    <p className=" text-gray-500 mt-4">
+                    <p className="text-sm text-gray-500 mt-4">
                         Don't have a account ?
                         <button
-                            className="text-blue-500 text-semibold ml-1"
+                            className="text-blue-500 text-sm ml-1 cursor-pointer"
                             onClick={()=> navigate('/signup')}
                         >
                             Create account

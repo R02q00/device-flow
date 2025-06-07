@@ -24,7 +24,6 @@ export default function Signin() {
             console.log(data);
             await api.post("/api/auth/signin", data)
                 .then(result => {
-                    console.log(result.data.accessToken)
                     localStorage.setItem("token", result.data.accessToken);
                     navigate('/home');
                 })

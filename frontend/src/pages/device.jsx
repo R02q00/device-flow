@@ -60,11 +60,11 @@ export default function Device({}) {
     return(
         <div className="relative h-[100vh]">
         <Back href={"home"} title={"Device"}/>
-        <div className="w-full flex justify-end items-center gap-3 pr-4">
+        <div className="w-full flex justify-end items-center gap-2 pr-2">
             {
-                selectedIds.length !== 0 ? <CiTrash className="text-xl text-red-500 rounded-sm hover:bg-red-100 hover:cursor-pointer active:text-red-600" onClick={() => {handleDelete()}}/> : null
+                selectedIds.length !== 0 ? <CiTrash className="text-xl text-indigo-500 rounded-sm hover:text-indigo-700 hover:cursor-pointer active:text-indigo-700" onClick={() => {handleDelete()}}/> : null
             }
-            <HiDotsVertical className="text-xl text-indigo-500 rounded-sm hover:bg-gray-100 hover:cursor-pointer active:text-indigo-700"/>
+            <HiDotsVertical className="text-xl text-indigo-500 rounded-sm hover:text-indigo-700 hover:cursor-pointer active:text-indigo-700"/>
         </div>
         <div className="overflow-x-auto">
             <table className="table">

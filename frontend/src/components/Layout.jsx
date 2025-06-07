@@ -20,7 +20,7 @@ const Layout = () => {
                 navigate("/home")
             })
             .catch(error => {
-                console.log(error.result?.message || error.message)
+                console.log(error.result?.message || error.message);
                 navigate('/')
             })
     }

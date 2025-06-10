@@ -64,7 +64,18 @@ export default function Device({}) {
             {
                 selectedIds.length !== 0 ? <CiTrash className="text-xl text-indigo-500 rounded-sm hover:text-indigo-700 hover:cursor-pointer active:text-indigo-700" onClick={() => {handleDelete()}}/> : null
             }
-            <HiDotsVertical className="text-xl text-indigo-500 rounded-sm hover:text-indigo-700 hover:cursor-pointer active:text-indigo-700"/>
+            
+            <div className="dropdown dropdown-end">
+                    <div tabIndex={0} role="button">
+                        <HiDotsVertical className="text-xl text-indigo-500 rounded-sm hover:text-indigo-700 hover:cursor-pointer active:text-indigo-700"/>
+                    </div>
+                    <ul
+                        tabIndex={0}
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        <li><a>A-Z</a></li>
+                        <li><a>Z-A</a></li>
+                    </ul>
+            </div>
         </div>
         <div className="overflow-x-auto">
             <table className="table">

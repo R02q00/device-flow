@@ -1,12 +1,12 @@
-import db from '../models/model.js'
+import db from '../models/model.js';
 const Loan = db.loan;
 
 export const getAllLoan = (req, res, next) => {
     Loan.findAll()
-        .then(result=>{
-
+        .then(loans=>{
+            res.status(200).json({loans: loans});
         })
-        .catch(error => console.log(error.result?.message || error.message))
+        .catch(error => console.log(error.loans?.message || error.message))
 }
 
 export const getLoan = (req, res, next) => {
@@ -18,7 +18,7 @@ export const getLoan = (req, res, next) => {
             }
             res.status(200).json({loan: loan})
         })
-        .catch(error => console.log(error.result?.message || error.message))
+        .catch(error => console.log(error.loan?.message || error.message))
 }
 
 export const createLoan = (req, res, next) => {
@@ -30,7 +30,7 @@ export const createLoan = (req, res, next) => {
         start: start,
         end: end,
     })
-        .then(result=>{
+        .then(result => {
             console.log("Loan saved !");
             res.status(201).json({message: 'Loan saved successfully !', loan: result})
         })

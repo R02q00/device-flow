@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { api } from '../configApi/configs';
 
-const Slider = ({mode,close}) => {
+const Slider = ({mode, close}) => {
     const [next, setNext] = useState(true);
     const [back, setBack] = useState(false);
-    const [data, setData] = useState({name: '',tools: '',statut: '',start: '', end: ''});
+    const [data, setData] = useState({loaner: '',tools: 'Projecteur',statut: '',start: '', end: ''});
     const [tools, setTools] = useState([]);
     const [selectedIds, setSelectedIds] = useState([]);
 
@@ -35,11 +35,19 @@ const Slider = ({mode,close}) => {
 
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
         console.log(`${mode} loan device`)
         if(mode === 'new'){
-            console.log(data)
+            console.log(data);
+            await api.post("api/loan", data)
+                .then(result => {
+                    console.log(result.data);
+                    close();
+                })
+                .catch(error => console.log(error.result?.message || error.message))
+        }else{
+            
         }
 
     };
@@ -56,9 +64,9 @@ const Slider = ({mode,close}) => {
                     {/* 01 */}
                     <div className={next ? 'absolute left-2 duration-200' : 'absolute left-[-450px] duration-200'}>
                         <div className="flex flex-col mb-3">
-                            <label htmlFor="loaner" className='text-sm text-gray-700'>Name:</label>
-                            <input type="text" name="name" className="w-full border border-indigo-500 rounded-sm p-1 focus:outline-none"
-                                value={data.name}
+                            <label htmlFor="loaner" className='text-sm text-gray-700'>Loaner name:</label>
+                            <input type="text" name="loaner" className="w-full border border-indigo-500 rounded-sm p-1 focus:outline-none"
+                                value={data.loaner}
                                 onChange={handleChange}
                             />
                         </div>

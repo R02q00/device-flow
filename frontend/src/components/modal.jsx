@@ -12,7 +12,7 @@ const Modal = ({mode, refresh, id, isOpen, onClose}) => {
   ]
   const [data, setData] = useState({
     sequence_number: '',
-    name: '',
+    loaner: '',
     photo: '',
     statut: '',
   })
@@ -23,7 +23,7 @@ const Modal = ({mode, refresh, id, isOpen, onClose}) => {
   const getTools = async() => {
       await api.get(`api/tools/${id}`)
         .then(result => {
-            setData({...data, sequence_number: result.data.tools.sequence_number, name:result.data.tools.name,
+            setData({...data, sequence_number: result.data.tools.sequence_number, loaner:result.data.tools.name,
               statut:result.data.tools.statut
             })
         })

@@ -2,6 +2,9 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import Validate from "./validate";
 import { api } from "../configApi/configs";
+import {MdDeviceHub} from "react-icons/md";
+import loginImage from '../assets/photo.png';
+
 
 export default function Signin() {
     const navigate = useNavigate();
@@ -34,16 +37,20 @@ export default function Signin() {
     };
 
     return(
-        <div className="h-[100vh]">
-            <div className="max-w-md mx-auto p-10">
-                <div className="mb-2">
-                    <p className="font-bold text-center mb-2">
-                        <span className="text-red-500">DEVICE</span>
-                        <span className="text-gray-800">-FLOW</span>
-                    </p>
-                    <h1 className="text-xl text-gray-700 font-semibold">Log in</h1>
-                </div>
-                <div className="">
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+            
+            <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-md overflow-hidden">
+                    <div className="md:w-1/2 flex flex- items-center justify-center p-8">
+                        <img 
+                            src={loginImage} 
+                            alt="image connexion" 
+                            className="w-full h-auto object-cover"
+                        />
+                    </div>
+                    <div className="md:w-1/2 p-8 space-y-8">
+                    <div className="text-center">
+                        <h2 className="text-2xl font-extrabold text-gray-900">Log in</h2>
+                    </div>
                     <form onSubmit={handleSubmit}>
                         {/*Username*/}
                         <div className="mb-4">
@@ -107,8 +114,8 @@ export default function Signin() {
                             Create account
                         </button>
                     </p>
+                    </div>
                 </div>
-            </div>
         </div>
     )
 }

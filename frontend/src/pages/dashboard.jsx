@@ -16,7 +16,7 @@ export default function Dashboard({}) {
                     <Graphic />
                 </div>
                 <div className="bg-white rounded-lg px-2 py-1">
-                    <h1>List user</h1>
+                    <h1>Loan en cours</h1>
                 </div>
             </div>
         </div>

@@ -46,7 +46,7 @@ export const getToolsActive = (req, res) => {
 
 export const createTools = (req, res) => {
     const {sequence_number, name} = req.body;
-    const photoPath = req.file ? req.file.filename : null;
+    const photoPath = req.file ? req.file.filename : req.file.filename;
     Tools.create({
         sequence_number: sequence_number,
         name: name,

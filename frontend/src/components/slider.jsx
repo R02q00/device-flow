@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import { api } from '../configApi/configs';
 
-const Slider = ({mode, close}) => {
+const Slider = ({mode, close, ref}) => {
     const [next, setNext] = useState(true);
     const [back, setBack] = useState(false);
-    const [data, setData] = useState({loaner: '',tools: 'Projecteur',statut: '',start: '', end: ''});
+    const [data, setData] = useState({loaner: '',tools: 'Computer',statut: '',start: '', end: ''});
     const [tools, setTools] = useState([]);
     const [selectedIds, setSelectedIds] = useState([]);
-
     const handleNext = () => {
         setNext(!next);
         setBack(!back);
@@ -26,12 +25,25 @@ const Slider = ({mode, close}) => {
     const handleChange = (e) => {
         setData({...data, [e.target.name]: e.target.value})
     }
-    const getToolsActive = async() =>{
-        await api.get('api/tools')
+    const getToolsActive = async () =>{
+        await api.get('/api/tools')
             .then(result=>{
                 setTools(result.data.tools);
             })
             .catch(error => console.log(error.result?.message || error.message));
+
+    }
+
+    const getLoan = async () => {
+        const loanId = ref;
+        await api.get(`/api/loan/${loanId}`)
+            .then(result => {
+                console.log(result);
+                setData({...data, loaner: result.data.loan.loaner,
+                    statut:result.data.loan.statut, start: result.data.loan.start, end: result.data.loan.end
+                });
+            })
+            .catch(error => error.result?.message || error.message);
 
     }
 
@@ -47,18 +59,32 @@ const Slider = ({mode, close}) => {
                 })
                 .catch(error => console.log(error.result?.message || error.message))
         }else{
-            
+            console.log(data);
+            const loanId = ref;
+            await api.put(`api/loan/${loanId}`, data)
+                .then(result => {
+                    console.log(result.data);
+                    close();
+                })
+                .catch(error => error.result?.message || error.message)
         }
 
     };
     useEffect(()=>{
+        console.log(ref)
         getToolsActive();
-    },[])
+        if(mode === 'edit'){
+            getLoan();
+        }
+    },[ref])
     
     return(
         <div className="fixed inset-0 flex">
             <div className="fixed inset-0 bg-gray-600 opacity-50" ></div>
             <div className="ml-auto bg-white w-70 h-full shadow-lg transition-transform transform translate-x-0">
+                <div className='flex justify-end px-2 py-1 font-semibold'>
+                    <button className='btn btn-xs' onClick={close}>x</button>
+                </div>
                 <h3 className='text-md font-semibold text-indigo-500 ml-2'>{mode === 'new' ? 'New Emprunts' : 'Edit Emprunts'}</h3>
                 <form onSubmit={handleSubmit} className="p-2 relative overflow-hidden h-[100%]">
                     {/* 01 */}
@@ -89,9 +115,9 @@ const Slider = ({mode, close}) => {
                             />
                         </div>
 
-                        <div className="flex justify-end gap-2 mt-2">
-                            <button className="text-md text-white bg-gray-400 rounded-sm px-2 hover:bg-gray-500 hover:cursor-pointer" onClick={() => {close();}}>Cancel</button>
-                            <button type="button" className="text-md text-white bg-indigo-500 rounded-sm px-4 hover:bg-indigo-700  hover:cursor-pointer" onClick={() => {handleNext();}}>Next</button>
+                        <div className="flex justify-end gap-2 mt-5">
+                            <button className="text-sm text-white bg-gray-400 rounded-sm px-3 py-1 hover:bg-gray-500 hover:cursor-pointer" onClick={() => {close();}}>Cancel</button>
+                            <button type="button" className="text-sm text-white bg-indigo-500 rounded-sm px-3 py-1 hover:bg-indigo-700  hover:cursor-pointer" onClick={() => {handleNext();}}>Next</button>
                         </div>
                     </div>
                     {/* 02 */}
@@ -111,8 +137,8 @@ const Slider = ({mode, close}) => {
                             ))
                         }
                         <div className="w-67 flex justify-end gap-2 mt-5">
-                            <button type='button' className="text-md text-white bg-gray-400 rounded-sm px-4 hover:bg-gray-500 hover:cursor-pointer" onClick={() => {handleNext()}}>Back</button>
-                            <button type="submit" className="text-md text-white bg-indigo-500 rounded-sm px-4 hover:bg-indigo-700  hover:cursor-pointer ">{mode ==='new' ? 'Save' : 'Update'}</button>
+                            <button type='button' className="text-sm text-white bg-gray-400 rounded-sm px-4 py-1 hover:bg-gray-500 hover:cursor-pointer" onClick={() => {handleNext()}}>Back</button>
+                            <button type="submit" className="text-sm text-white bg-indigo-500 rounded-sm px-4 py-1 hover:bg-indigo-700  hover:cursor-pointer ">{mode ==='new' ? 'Save' : 'Update'}</button>
                         </div>
                     </div>
                 </form>

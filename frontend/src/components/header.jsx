@@ -13,10 +13,10 @@ export const Header = () => {
             <PiDotsNine className='text-indigo-500 text-2xl'/>
             <h3 className="text-bold"><span className="text-red-500">DEVICE</span><span>-FLOW</span></h3>
             <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+              <div tabIndex={0} role="button" className="avatar">
                 <div className="w-10 rounded-full">
                   <img
-                    alt="Tailwind CSS Navbar component"
+                    alt="profile"
                     src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
                 </div>
               </div>

@@ -6,7 +6,7 @@ export const router = express.Router();
 
 router.get('/', getAllTools);
 router.get('/:toolsId', getTools);
-router.post('/', createTools);
+router.post('/', upload.single("photo"), createTools);
 router.post('/active', getToolsActive);
 router.put('/:toolsId', upload.single('photo'), updateTools);
 router.delete('/:toolsId', deleteTools);

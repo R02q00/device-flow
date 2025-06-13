@@ -47,6 +47,7 @@ export default function Device({}) {
     const getAlltools = async() => {
         await api.get("/api/tools")
             .then(result => {
+                console.log(result.data);
                 setData(result.data.tools);
             })
             .catch(error => console.log(error.result?.message || error.message))
@@ -109,7 +110,7 @@ export default function Device({}) {
                                 <div className="avatar">
                                     <div className="mask mask-squircle h-12 w-12">
                                     <img
-                                        src={`http://localhost:3000/Public/tools/${value.photo}`}
+                                        src={`http://localhost:3000/tools/${value.photo}`}
                                         alt="tools photo" />
                                     </div>
                                 </div>
@@ -121,7 +122,7 @@ export default function Device({}) {
                         </td>
                         <td>{value.statut}</td>
                         <td className="flex items-center justify-center py-6">
-                            <MdEditNote onClick={()=>{handleOpen('edit'), setSelectedId(value.id)}} className="text-xl text-indigo-600 cursor-pointer active:text-indigo-700"/>
+                            <MdEditNote onClick={()=>{handleOpen('edit'); setSelectedId(value.id)}} className="text-xl text-indigo-600 cursor-pointer active:text-indigo-700"/>
                         </td>
                         </tr>
                     ))

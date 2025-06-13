@@ -12,7 +12,7 @@ const Modal = ({mode, refresh, id, isOpen, onClose}) => {
   ]
   const [data, setData] = useState({
     sequence_number: '',
-    loaner: '',
+    name: '',
     photo: '',
     statut: '',
   })
@@ -23,7 +23,8 @@ const Modal = ({mode, refresh, id, isOpen, onClose}) => {
   const getTools = async() => {
       await api.get(`api/tools/${id}`)
         .then(result => {
-            setData({...data, sequence_number: result.data.tools.sequence_number, loaner:result.data.tools.name,
+            console.log(result.data);
+            setData({...data, sequence_number: result.data.tools.sequence_number, name:result.data.tools.name,
               statut:result.data.tools.statut
             })
         })
@@ -32,9 +33,14 @@ const Modal = ({mode, refresh, id, isOpen, onClose}) => {
 
   const handleSubmit = async(event) =>{
       event.preventDefault();
+      const formdata = new FormData();
+      formdata.append('sequence_number', data.sequence_number);
+      formdata.append('name', data.name);
+      formdata.append('photo', data.photo);
+      formdata.append('statut', data.statut);
       if (mode === 'add') {
         console.log(data)
-        await api.post('api/tools/', data)
+        await api.post('api/tools/', formdata)
           .then(result =>{
               console.log(result.data.message);
               onClose();
@@ -44,7 +50,7 @@ const Modal = ({mode, refresh, id, isOpen, onClose}) => {
 
       }else{
         console.log(data);
-        await api.put(`api/tools/${id}`, data)
+        await api.put(`api/tools/${id}`, formdata)
           .then(result => {
               console.log(result.data.message);
               onClose();

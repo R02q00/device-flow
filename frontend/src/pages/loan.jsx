@@ -5,11 +5,13 @@ import { IoIosAdd as Add } from 'react-icons/io';
 import { CiTrash } from 'react-icons/ci';
 import { HiDotsVertical } from 'react-icons/hi';
 import { api } from '../configApi/configs.js';
+import { data } from 'react-router-dom';
 
 export default function Loan({}) {
     const [isOpen, setIsOpen] = useState(false);
     const [mode, setMode] = useState('new');
     const [loan, setLoan] = useState([]);
+    const [selectedId, setSelectedId] = useState(0);
     const handleOpen = (mode) => {
         setIsOpen(!isOpen);
         setMode(mode);
@@ -34,7 +36,9 @@ export default function Loan({}) {
                 console.log(error.result?.message || error.message)
             })
     };
-
+    const date = new Date();
+    const formatDate = date.toLocaleDateString();
+    const time = date.toLocaleTimeString();
     useEffect(() => {
         getLoan();
 
@@ -64,7 +68,7 @@ export default function Loan({}) {
                             <th>Device</th>
                             <th>Duration</th>
                             <th>Statut</th>
-                            <th>Actions</th>
+                            <th className='text-center'>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,16 +78,17 @@ export default function Loan({}) {
                                     <td>{value.loaner}</td>
                                     <td>{value.tools}</td>
                                     <td>
-                                        <div className='flex gap-2'>
-                                            <span>{value.start}</span>
-                                            <span>{value.end}</span>
+                                        <div className='flex gap-1'>
+                                            <span>{new Date(value.start).toLocaleTimeString()}</span>
+                                            <span>-</span>
+                                            <span>{new Date(value.end).toLocaleTimeString()}</span>
                                         </div>
                                     </td>
                                     <td>{value.statut}</td>
                                     <td>
-                                        <div className='flex justify-end gap-1'>
-                                            <button className='btn btn-xs bg-indigo-500 text-white' onClick={()=> handleOpen('edit')}>Edit</button>
-                                            <button className='btn btn-xs bg-red-400 text-white' onClick={()=> handleDelete(value.id)}>Delete</button>
+                                        <div className='flex justify-center gap-1'>
+                                            <button className='btn btn-xs bg-indigo-500 text-white border-0' onClick={()=> {handleOpen('edit'); setSelectedId(value.id)}}>Edit</button>
+                                            <button className='btn btn-xs bg-red-400 text-white border-0' onClick={()=> handleDelete(value.id)}>Delete</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -96,7 +101,7 @@ export default function Loan({}) {
             <div className='absolute bottom-2 right-2 rounded-full bg-indigo-500 flex items-center justify-center p-2 mr-2'>
                 <Add className="text-white text-2xl cursor-pointer" onClick={()=>{handleOpen('new')}}/>
             </div>
-            {isOpen ? <Slider mode={mode} close={() => setIsOpen(!isOpen)}/> : null}
+            {isOpen ? <Slider mode={mode} close={() => {setIsOpen(!isOpen)}} ref={selectedId}/> : null}
         </div>
 
     );

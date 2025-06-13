@@ -9,17 +9,17 @@ export const getAllLoan = (req, res, next) => {
         .catch(error => console.log(error.loans?.message || error.message))
 }
 
-export const getLoan = (req, res, next) => {
-    const loanId = req.parms.loanId;
+export const getLoan = (req, res) => {
+    const loanId = req.params.loanId;
     Loan.findByPk(loanId)
-        .then(loan=>{
+        .then( loan => {
             if(!loan){
-                return res.status(404).json({message: "Loan not found !"})
+                return res.status(404).json({message: 'Tools not found'});
             }
             res.status(200).json({loan: loan})
         })
-        .catch(error => console.log(error.loan?.message || error.message))
-}
+        .catch(error => console.log(error));
+};
 
 export const createLoan = (req, res, next) => {
     const {loaner, tools, statut, start, end} = req.body;

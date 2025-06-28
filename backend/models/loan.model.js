@@ -9,10 +9,6 @@ export default(sequelize, DataTypes) =>{
             type: DataTypes.STRING,
             allowNull: false,
         },
-        tools: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
         statut: {
             type: DataTypes.STRING,
             allowNull: false,

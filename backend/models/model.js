@@ -26,11 +26,16 @@ db.loan = LoanModel(sequelize, Sequelize);
 db.role.belongsToMany(db.user, { through: "user_roles" });
 db.user.belongsToMany(db.role, { through: "user_roles", as: "roles" });
 
-db.tools.belongsToMany(db.loan,{through: "behaves"});
-db.loan.belongsToMany(db.tools, {through: "behaves", as: "users"});
+db.loan.belongsToMany(db.tools, {
+    through: "loan_tools",
+    foreignKey: "loan_id", 
+});
+  
+db.tools.belongsToMany(db.loan, {
+    through: "loan_tools", 
+    foreignKey: "tool_id", 
+});
 
-db.user.hasMany(db.loan, {foreignKey: "userId" });
-db.loan.belongsTo(db.user, {foreignKey: "userId" });
  
 db.ROLES = ["user", "admin", "moderator"];
 

@@ -24,7 +24,6 @@ export default function Signin() {
         e.preventDefault();
         setErrors(Validate(data));
         if(errors.username === "" && errors.password === ""){
-            console.log(data);
             await api.post("/api/auth/signin", data)
                 .then(result => {
                     localStorage.setItem("token", result.data.accessToken);
@@ -44,7 +43,7 @@ export default function Signin() {
                         <img 
                             src={loginImage} 
                             alt="image connexion" 
-                            className="w-full h-auto object-cover"
+                            className="sm:max-w-xs lg:max-w-sm object-cover"
                         />
                     </div>
                     <div className="md:w-1/2 p-8 space-y-8">

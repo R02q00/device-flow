@@ -13,7 +13,7 @@ export default function Dashboard({}) {
             <Card/>
             <div className="grid sm:grid-cols-1 md:grid-cols-2 px-1 gap-2">
                 <div className="bg-white">
-                    <Graphic />
+                    
                 </div>
                 <div className="bg-white rounded-lg px-2 py-1">
                     <h1>Loan en cours</h1>

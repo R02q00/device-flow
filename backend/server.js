@@ -40,7 +40,7 @@ const initializeRoles = async () => {
     }
 };
 
-db.sequelize.sync({force: false})
+db.sequelize.sync({alter: true})
     .then( async() => {
         //active if first try
         //await initializeRoles();

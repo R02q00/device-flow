@@ -6,8 +6,16 @@ import { CiTrash } from 'react-icons/ci';
 import { HiDotsVertical } from 'react-icons/hi';
 import { api } from '../configApi/configs.js';
 import { data } from 'react-router-dom';
+/*
+import ReactTimeAgo from 'react-time-ago'
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
+import ru from 'javascript-time-ago/locale/ru'
 
-export default function Loan({}) {
+TimeAgo.addDefaultLocale(en);
+TimeAgo.addLocale(ru); */
+
+export default function Loan({ }) {
     const [isOpen, setIsOpen] = useState(false);
     const [mode, setMode] = useState('new');
     const [loan, setLoan] = useState([]);
@@ -17,9 +25,10 @@ export default function Loan({}) {
         setMode(mode);
 
     }
-    const getLoan = async() => {
+    const getLoan = async () => {
         await api.get("/api/loan")
-            .then(result=>{
+            .then(result => {
+                console.log(result.data.loans.name);
                 setLoan(result.data.loans);
             })
             .catch(error => {
@@ -36,21 +45,19 @@ export default function Loan({}) {
                 console.log(error.result?.message || error.message)
             })
     };
-    const date = new Date();
-    const formatDate = date.toLocaleDateString();
-    const time = date.toLocaleTimeString();
+
     useEffect(() => {
         getLoan();
 
-    },[])
+    }, [])
 
-    return(
+    return (
         <div className="h-[100vh] relative">
-            <Back href={"home"} title={"Loan a device"}/>
+            <Back href={"home"} title={"Loan a device"} />
             <div className="w-full flex justify-end items-center gap-3 pr-3">
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button">
-                        <HiDotsVertical className="text-xl text-indigo-500 rounded-sm hover:text-indigo-700 hover:cursor-pointer active:text-indigo-700"/>
+                        <HiDotsVertical className="text-xl text-indigo-500 rounded-sm hover:text-indigo-700 hover:cursor-pointer active:text-indigo-700" />
                     </div>
                     <ul
                         tabIndex={0}
@@ -65,7 +72,7 @@ export default function Loan({}) {
                     <thead>
                         <tr>
                             <th>Loaner</th>
-                            <th>Device</th>
+                            <th>Device emprunter</th>
                             <th>Duration</th>
                             <th>Statut</th>
                             <th className='text-center'>Actions</th>
@@ -73,11 +80,23 @@ export default function Loan({}) {
                     </thead>
                     <tbody>
                         {
-                            loan.map( (value) => (
+                            loan.map((value) => (
                                 <tr key={value.id}>
                                     <td>{value.loaner}</td>
-                                    <td>{value.tools}</td>
+                                    <td>{value.tools.length > 0 ? (
+                                        <ul className="list-disc pl-5">
+                                            {value.tools.map(tool => (
+                                                <li key={tool.id}>
+                                                    {tool.name}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    ) : (
+                                        <p>Aucun matériel associé</p>
+                                    )}</td>
                                     <td>
+                                    <span className='text-orange-400'>Hier{/*<ReactTimeAgo date={value.end} locale="fr-FR"/>*/}</span>
+
                                         <div className='flex gap-1'>
                                             <span>{new Date(value.start).toLocaleTimeString()}</span>
                                             <span>-</span>
@@ -87,8 +106,8 @@ export default function Loan({}) {
                                     <td>{value.statut}</td>
                                     <td>
                                         <div className='flex justify-center gap-1'>
-                                            <button className='btn btn-xs bg-indigo-500 text-white border-0' onClick={()=> {handleOpen('edit'); setSelectedId(value.id)}}>Edit</button>
-                                            <button className='btn btn-xs bg-red-400 text-white border-0' onClick={()=> handleDelete(value.id)}>Delete</button>
+                                            <button className='btn btn-xs bg-indigo-500 text-white border-0' onClick={() => { handleOpen('edit'); setSelectedId(value.id) }}>Edit</button>
+                                            <button className='btn btn-xs bg-red-400 text-white border-0' onClick={() => handleDelete(value.id)}>Delete</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -99,9 +118,9 @@ export default function Loan({}) {
             </div>
 
             <div className='absolute bottom-2 right-2 rounded-full bg-indigo-500 flex items-center justify-center p-2 mr-2'>
-                <Add className="text-white text-2xl cursor-pointer" onClick={()=>{handleOpen('new')}}/>
+                <Add className="text-white text-2xl cursor-pointer" onClick={() => { handleOpen('new') }} />
             </div>
-            {isOpen ? <Slider mode={mode} close={() => {setIsOpen(!isOpen)}} ref={selectedId}/> : null}
+            {isOpen ? <Slider mode={mode} isOpen={isOpen} close={() => { setIsOpen(!isOpen) }} ref={selectedId} /> : null}
         </div>
 
     );

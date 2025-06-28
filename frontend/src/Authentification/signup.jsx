@@ -22,7 +22,6 @@ export default function Signup() {
         e.preventDefault();
         setErrors(Validate(data));
         if (errors.username==="" && errors.email==="" && errors.password==="") {
-            console.log(data);
             await api.post("/api/auth/signup", data)
                 .then(result => {
                     console.log(result.data.message);
@@ -41,7 +40,7 @@ export default function Signup() {
                         <img 
                             src={loginImage} 
                             alt="image connexion" 
-                            className="w-full h-auto object-cover"
+                            className="sm:max-w-xs lg:max-w-sm object-cover"
                         />
                     </div>
                     <div className="md:w-1/2 p-8 space-y-8">
@@ -124,7 +123,7 @@ export default function Signup() {
                         <p className="text-sm text-gray-500 mt-4">
                             Have an account !
                             <button 
-                                className="text-sm text-indigo-500  ml-1"
+                                className="text-sm text-blue-500 ml-1 cursor-pointer"
                                 onClick={()=> navigate('/')}
                             >
                                 Log in

@@ -1,13 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaList, FaHands } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import { IoHelp } from "react-icons/io5";
+import { GoRelFilePath } from "react-icons/go";
 import { MdDashboard } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { Header } from "./header";
 
 const Navigation = () => {
+    const [searchTerm, setSearchTerm] = useState("");
+    const [suggestions, setSuggestions] = useState([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
+
     const navigate = useNavigate();
+    const routeOptions = [
+        {
+            path: "/dashboard",
+            name: "Dashboard",
+            icon: <GoRelFilePath />,
+            keywords: ["accueil", "tableau", "stats"]
+        },
+        {
+            path: "/device",
+            name: "Device",
+            icon: <GoRelFilePath />,
+            keywords: ["appareils", "add", "outils"]
+        },
+        {
+            path: "/loan",
+            name: "Emprunts",
+            icon: <GoRelFilePath />,
+            keywords: ["add", "emprunter", "reservation"]
+        },
+        {
+            path: "/about",
+            name: "Aide",
+            icon: <GoRelFilePath />,
+            keywords: ["aide", "support", "documentation", "help"]
+        }
+    ];
+
+    const filtered = routeOptions.filter(option => 
+        option.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+
+        option.keywords.some(kw => 
+            kw.toLowerCase().includes(searchTerm.toLowerCase()
+        )
+    ));
+
+    useEffect(() => {
+        if (searchTerm.trim() === "") {
+            setSuggestions([]);
+            return;
+        }
+        setSuggestions(filtered);
+    }, [searchTerm]);
+
+    const handleSuggestionClick = (path) => {
+        navigate(path);
+        setSearchTerm("");
+        setShowSuggestions(false);
+    };
     return (
         <div className="w-full h-[100vh] bg-base-100 flex flex-col">
             <Header />
@@ -20,10 +73,24 @@ const Navigation = () => {
                         type="text"
                         className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white shadow-xs focus:outline-none 
                         focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-gray-700"
-                        placeholder="Rechercher..."
+                        placeholder="Search ..."
+                        onChange={(e) => { setSearchTerm(e.target.value); setShowSuggestions(true) }}
+                        onFocus={() => setShowSuggestions(true)}
+                        onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                     />
                 </div>
-                
+                {showSuggestions && suggestions.length > 0 && (
+                    <div className="w-full text-left">
+                        {suggestions.map((item, index) => (
+                            <div key={index} className="flex items-center space-x-2 hover:text-indigo-500 cursor-pointer"
+                                onClick={() => handleSuggestionClick(item.path)}
+                            >
+                                <span>{item.icon}</span>
+                                <span>{item.name}</span>
+                            </div>
+                        ))}
+                    </div>
+                )}
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full mt-10">
                     <div className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all duration-300
                         border border-gray-100 hover:border-blue-100 cursor-pointer group"
@@ -35,6 +102,8 @@ const Navigation = () => {
                             <h2 className="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
                                 Dashboard
                             </h2>
+                            <p className="text-sm text-gray-500">Overview</p>
+
                         </div>
                     </div>
                     <div className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all duration-300
@@ -46,8 +115,9 @@ const Navigation = () => {
                                 <FaList className="text-green-600 text-2xl" />
                             </div>
                             <h3 className="text-lg font-semibold text-gray-800 group-hover:text-green-600 transition-colors">
-                                Matériels
+                                Device
                             </h3>
+                            <p className="text-sm text-gray-500">Device list</p>
                         </div>
                     </div>
 
@@ -62,11 +132,12 @@ const Navigation = () => {
                             <h3 className="text-lg font-semibold text-gray-800 group-hover:text-purple-600 transition-colors">
                                 Emprunts
                             </h3>
+                            <p className="text-sm text-gray-500">Emprunts list</p>
                         </div>
                     </div>
                     <div className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all duration-300
                             border border-gray-100 hover:border-orange-100 cursor-pointer group"
-                            onClick={() => navigate('/about')}
+                        onClick={() => navigate('/about')}
                     >
                         <div className="flex flex-col items-center gap-3">
                             <div className="p-3 bg-orange-50 rounded-full group-hover:bg-orange-100 transition-colors">
@@ -75,6 +146,8 @@ const Navigation = () => {
                             <h3 className="text-lg font-semibold text-gray-800 group-hover:text-orange-600 transition-colors">
                                 Aide
                             </h3>
+                            <p className="text-sm text-gray-500">Documentation</p>
+
                         </div>
                     </div>
                 </div>

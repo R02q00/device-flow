@@ -9,9 +9,9 @@ export const Header = () => {
         navigate('/');
     }
     return( 
-        <div className="h-20 flex justify-between items-center px-2">
+        <div className="h-15 flex justify-between items-center px-2">
             <PiDotsNine className='text-indigo-500 text-2xl'/>
-            <h3 className="text-bold"><span className="text-red-500">DEVICE</span><span>-FLOW</span></h3>
+            <h3 className=""><span className="text-red-500 text-bold">DEVICE</span><span>-FLOW</span></h3>
             <div className="dropdown dropdown-end">
               <div tabIndex={0} role="button" className="avatar">
                 <div className="w-10 rounded-full">

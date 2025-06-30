@@ -6,7 +6,7 @@ const Card = () =>{
         <div className="grid  sm:grid-cols-2 md:grid-cols-3 gap-1 px-2 py-2">
                   <div className="bg-white flex items-center p-4 rounded-lg hover:shadow-lg transition-shadow">
                       <div className="w-full flex items-center gap-2 cursor-pointer">
-                          <div className="p-5 bg-blue-100 rounded-sm">
+                          <div className="p-5 bg-blue-200 rounded-sm">
                               <MdDeviceHub className='text-blue-500 text-xl'/>
                           </div>
                          <div className="w-full flex flex-col items-center">
@@ -17,8 +17,8 @@ const Card = () =>{
                   </div>
                   <div className="bg-white flex items-center p-4 rounded-lg hover:shadow-lg transition-shadow">
                       <div className="w-full flex items-center gap-2 cursor-pointer">
-                          <div className="bg-orange-100 rounded-sm p-5">
-                              <MdHourglassEmpty className='text-red-500 text-xl'/>
+                          <div className="bg-orange-200 rounded-sm p-5">
+                              <MdHourglassEmpty className='text-orange-500 text-xl'/>
                           </div>
                           <div className="w-full flex flex-col items-center">
                             <span>02</span>
@@ -28,7 +28,7 @@ const Card = () =>{
                   </div>
                   <div className="bg-white flex items-center p-4 rounded-lg hover:shadow-lg transition-shadow">
                       <div className="w-full flex items-center gap-2 cursor-pointer">
-                        <div className="bg-red-100 rounded-sm p-5">
+                        <div className="bg-red-200 rounded-sm p-5">
                             <MdSettings className='text-red-500 text-xl'/>
                         </div>
                         <div className="w-full flex flex-col items-center">

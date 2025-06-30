@@ -1,4 +1,5 @@
 import Back from "../components/back";
+import LoanList from "../components/loanView";
 
 export default function About({}) {
 

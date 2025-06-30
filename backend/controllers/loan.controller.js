@@ -9,7 +9,8 @@ export const getAllLoan = async (req, res) => {
                 model: Tool,
                 through: { attributes: [] },
                 attributes: ['id', 'name']
-            }]
+            }],
+            order: [['createdAt', 'DESC']]
         });
         res.status(200).json({ loans });
     } catch (error) {

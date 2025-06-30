@@ -7,7 +7,7 @@ const Back = ({href, title}) =>{
     return(
         <div className="px-3 py-2 flex items-center gap-3"> 
             <Preview className="cursor-pointer" onClick={()=>navigate(`/${href}`)}/>
-            <h3 className="font-bold">{title}</h3>
+            <h3 className="text-xl">{title}</h3>
         </div>
     );
 }

@@ -52,7 +52,7 @@ export default function Loan({ }) {
     const handleDelete = async (ref) => {
         await api.delete(`/api/loan/${ref}`)
             .then(result => {
-                console.log(result);
+                console.log(result.data.message);
                 getLoan();
             })
             .catch(error => {
@@ -75,7 +75,7 @@ export default function Loan({ }) {
     return (
         <div className="h-[100vh] relative">
             <Back href={"home"} title={"Loan List"} />
-            <div className="flex justify-end items-center space-x-2 mb-3 px-4">
+            <div className="flex justify-end items-center space-x-2 mb-3 px-3">
                 <div className="relative max-w-md">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <FiSearch className="text-gray-400" />
@@ -97,41 +97,41 @@ export default function Loan({ }) {
                     )}
                 </div>
                 <div className="dropdown dropdown-end">
-                    <div tabIndex={0} role="button" className="btn px-1">
+                    <div tabIndex={0} role="button" className="p-2 border border-gray-200 rounded-sm">
                         <HiDotsVertical className="text-xl text-indigo-500" />
                     </div>
-                    <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><a>A-Z</a></li>
-                        <li><a>Z-A</a></li>
+                    <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-200 ounded-box w-52">
+                        <li className='hover:bg-gray-200 rounded-sm'><a>A-Z</a></li>
+                        <li className='hover:bg-gray-200 rounded-sm'><a>Z-A</a></li>
                     </ul>
                 </div>
             </div>
-            <div className='overflow-x-auto px-4'>
+            <div className='overflow-x-auto mt-5 px-3'>
                 <table className='table'>
                     <thead className="bg-gray-100">
                         <tr>
                             <th className="py-3 px-4 text-left">
                                 <div className="flex items-center gap-2">
                                     <FiUser className="text-gray-500" />
-                                    <span>Emprunteur</span>
+                                    <span>Loaner</span>
                                 </div>
                             </th>
                             <th className="py-3 px-4 text-left">
                                 <div className="flex items-center gap-2">
                                     <FiHardDrive className="text-gray-500" />
-                                    <span>Matériels</span>
+                                    <span>Device</span>
                                 </div>
                             </th>
                             <th className="py-3 px-4 text-left">
                                 <div className="flex items-center gap-2">
                                     <FiClock className="text-gray-500" />
-                                    <span>Durée</span>
+                                    <span>Delay</span>
                                 </div>
                             </th>
                             <th className="py-3 px-4 text-left">
                                 <div className="flex items-center gap-2">
                                     <FiActivity className="text-gray-500" />
-                                    <span>Statut</span>
+                                    <span>Status</span>
                                 </div>
                             </th>
                             <th className="py-3 px-4 text-center">Actions</th>
@@ -140,7 +140,7 @@ export default function Loan({ }) {
                     <tbody>
                         {filteredLoan.length > 0 ? (
                             filteredLoan.map((loan) => (
-                                <tr key={loan.id} className="hover:bg-gray-50 border-b border-gray-100">
+                                <tr key={loan.id} className="border-b border-gray-100">
                                     <td className="py-4 px-4 font-medium text-gray-800">
                                         {loan.loaner}
                                     </td>
@@ -154,7 +154,7 @@ export default function Loan({ }) {
                                                 ))}
                                             </ul>
                                         ) : (
-                                            <span className="text-gray-400">Aucun matériel</span>
+                                            <span className="text-gray-400">No device loaned</span>
                                         )}
                                     </td>
                                     <td className="py-4 px-4">
@@ -196,7 +196,7 @@ export default function Loan({ }) {
                         ) : (
                             <tr>
                                 <td colSpan="5" className="py-8 text-center text-gray-500">
-                                    Aucun emprunt trouvé
+                                    No loan for a moment
                                 </td>
                             </tr>
                         )}

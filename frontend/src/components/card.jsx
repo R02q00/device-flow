@@ -4,7 +4,7 @@ import {MdDeviceHub, MdHourglassEmpty, MdSettings } from "react-icons/md";
 const Card = () =>{
     return(
         <div className="grid  sm:grid-cols-2 md:grid-cols-3 gap-1 px-2 py-2">
-                  <div className="bg-white flex items-center p-4 rounded-lg hover:shadow-lg transition-shadow">
+                  <div className="flex items-center p-4 border border-blue-400 rounded-lg hover:shadow-lg shadow-md">
                       <div className="w-full flex items-center gap-2 cursor-pointer">
                           <div className="p-5 bg-blue-200 rounded-sm">
                               <MdDeviceHub className='text-blue-500 text-xl'/>
@@ -15,7 +15,7 @@ const Card = () =>{
                          </div>
                       </div>
                   </div>
-                  <div className="bg-white flex items-center p-4 rounded-lg hover:shadow-lg transition-shadow">
+                  <div className="flex items-center p-4 border border-orange-400 rounded-lg hover:shadow-lg shadow-md">
                       <div className="w-full flex items-center gap-2 cursor-pointer">
                           <div className="bg-orange-200 rounded-sm p-5">
                               <MdHourglassEmpty className='text-orange-500 text-xl'/>
@@ -26,7 +26,7 @@ const Card = () =>{
                         </div>
                       </div>
                   </div>
-                  <div className="bg-white flex items-center p-4 rounded-lg hover:shadow-lg transition-shadow">
+                  <div className="flex items-center p-4 border border-red-400  rounded-lg hover:shadow-lg shadow-md">
                       <div className="w-full flex items-center gap-2 cursor-pointer">
                         <div className="bg-red-200 rounded-sm p-5">
                             <MdSettings className='text-red-500 text-xl'/>

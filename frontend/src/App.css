@@ -1,6 +1,7 @@
 @import "tailwindcss";
+
 @plugin "daisyui"{
-    themes: light --default;
+    themes: false;
 }
 
 @font-face {
@@ -11,3 +12,11 @@
 body{
     font-family: "Poppins";
 }
+
+/*
+html{
+    @apply transition-colors duration-200;
+}
+body{
+    @apply bg-white dark:text-gray-100 dark:bg-gray-900 text-gray-900;
+}*/

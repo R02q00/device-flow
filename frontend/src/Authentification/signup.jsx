@@ -34,7 +34,7 @@ export default function Signup() {
 
     }
     return(
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 ">
             <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-md overflow-hidden">
                     <div className="md:w-1/2 flex items-center justify-center p-8">
                         <img 
@@ -45,12 +45,12 @@ export default function Signup() {
                     </div>
                     <div className="md:w-1/2 p-8 space-y-8">
                         <div className="text-center">
-                            <h2 className="text-2xl font-extrabold text-gray-900">Create account</h2>
+                            <h2 className="text-xl font-bold text-gray-900">Create account</h2>
                         </div>
                         <form onSubmit={handleSubmit}>
                         {/*Username*/}
                         <div className="mb-2">
-                            <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="username" className="text-sm font-medium text-gray-700 mb-1">
                                 Username
                             </label>
                             <input
@@ -68,7 +68,7 @@ export default function Signup() {
                         {/*email*/}
 
                         <div className="mb-2">
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="email" className="text-sm font-medium">
                                 E-mail
                             </label>
                             <input
@@ -77,15 +77,14 @@ export default function Signup() {
                                 name="email"
                                 value={data.email}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md
-                                focus:outline-none"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none"
                             />
                             {errors.email && <span className="text-sm text-red-400">{errors.email}</span>}
                         </div>
                         
                         {/* Password*/}
                         <div className="">
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="password" className="text-sm font-medium text-gray-700 mb-1">
                                 Password
                             </label>
                             <input
@@ -94,8 +93,7 @@ export default function Signup() {
                                 name="password"
                                 value={data.password}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md
-                                focus:outline-none"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none"
                             />
                             {errors.password && <span className="text-sm text-red-400">{errors.password}</span>}
                         </div>
@@ -113,8 +111,7 @@ export default function Signup() {
                         {/*button submit*/}
                         <button
                             type="submit"
-                            className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-200 
-                            focus:outline-none"
+                            className="w-full bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-200 focus:outline-none"
                         >
                             Signup
                         </button>

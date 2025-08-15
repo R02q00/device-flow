@@ -48,7 +48,6 @@ export default function Device({ }) {
     const getAlltools = async () => {
         await api.get("/api/tools")
             .then(result => {
-                console.log(result.data);
                 setData(result.data.tools);
             })
             .catch(error => console.log(error.result?.message || error.message))
@@ -73,7 +72,7 @@ export default function Device({ }) {
             <Back href={"home"} title={"Device list"} />
             <div className="w-full flex justify-end items-center gap-2 pr-2">
                 {
-                    selectedIds.length !== 0 ? <div className="btn"><CiTrash className="text-xl text-red-500 hover:cursor-pointer active:text-red-700" onClick={() => { handleDelete() }} /></div> : null
+                    selectedIds.length !== 0 ? <div className="p-2 border border-gray-300 rounded-sm"><CiTrash className="text-xl text-red-500 hover:cursor-pointer active:text-red-700" onClick={() => { handleDelete() }} /></div> : null
                 }
                 <div className="relative max-w-md">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -96,18 +95,18 @@ export default function Device({ }) {
                     )}
                 </div>
                 <div className="dropdown dropdown-end">
-                    <div tabIndex={0} role="button" className="btn px-2">
+                    <div tabIndex={0} role="button" className="px-2 border border-gray-300 py-2 rounded-sm">
                         <HiDotsVertical className="text-xl text-indigo-500 rounded-sm hover:text-indigo-700 hover:cursor-pointer active:text-indigo-700" />
                     </div>
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                        <li><a>A-Z</a></li>
-                        <li><a>Z-A</a></li>
+                        className="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        <li className="hover:bg-gray-700 rounded-sm px-2 py-1">A-Z</li>
+                        <li className="hover:bg-gray-700 rounded-sm px-2 py-1">Z-A</li>
                     </ul>
                 </div>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto mt-5">
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -131,7 +130,7 @@ export default function Device({ }) {
                                 <tr key={value.id}>
                                     <td>
                                         <label>
-                                            <input type="checkbox" className="checkbox w-5 h-5"
+                                            <input type="checkbox" className="checkbox w-5 h-5 rounded-sm"
                                                 value={value.id}
                                                 checked={selectedIds.includes(value.id)}
                                                 onChange={() => { handleSelectedChecked(value.id) }}

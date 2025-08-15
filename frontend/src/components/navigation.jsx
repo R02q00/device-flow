@@ -62,17 +62,16 @@ const Navigation = () => {
         setShowSuggestions(false);
     };
     return (
-        <div className="w-full h-[100vh] bg-base-100 flex flex-col">
+        <div className="w-full h-[100vh] flex flex-col">
             <Header />
             <div className="flex flex-col items-center gap-8 p-6 max-w-4xl mx-auto">
                 <div className="relative w-full md:w-3/4 lg:w-1/2">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <FiSearch className="text-gray-500 text-lg" />
+                        <FiSearch className="w-5 h-5 text-gray-500"/>
                     </div>
                     <input
                         type="text"
-                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white shadow-xs focus:outline-none 
-                        focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-gray-700"
+                        className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-white shadow-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder-gray-500"
                         placeholder="Search ..."
                         onChange={(e) => { setSearchTerm(e.target.value); setShowSuggestions(true) }}
                         onFocus={() => setShowSuggestions(true)}
@@ -86,7 +85,7 @@ const Navigation = () => {
                                 onClick={() => handleSuggestionClick(item.path)}
                             >
                                 <span>{item.icon}</span>
-                                <span>{item.name}</span>
+                                <span>{item.name}</span>    
                             </div>
                         ))}
                     </div>
@@ -99,7 +98,7 @@ const Navigation = () => {
                             <div className="p-3 bg-blue-50 rounded-full group-hover:bg-blue-100 transition-colors">
                                 <MdDashboard className="text-blue-600 text-2xl" />
                             </div>
-                            <h2 className="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
+                            <h2 className="text-lg font-semibold group-hover:text-blue-600 transition-colors">
                                 Dashboard
                             </h2>
                             <p className="text-sm text-gray-500">Overview</p>
@@ -114,10 +113,10 @@ const Navigation = () => {
                             <div className="p-3 bg-green-50 rounded-full group-hover:bg-green-100 transition-colors">
                                 <FaList className="text-green-600 text-2xl" />
                             </div>
-                            <h3 className="text-lg font-semibold text-gray-800 group-hover:text-green-600 transition-colors">
+                            <h3 className="text-lg font-semibold group-hover:text-green-600 transition-colors">
                                 Device
                             </h3>
-                            <p className="text-sm text-gray-500">Device list</p>
+                            <p className="text-sm dark:text-gray-400">Device list</p>
                         </div>
                     </div>
 
@@ -129,10 +128,10 @@ const Navigation = () => {
                             <div className="p-3 bg-purple-50 rounded-full group-hover:bg-purple-100 transition-colors">
                                 <FaHands className="text-purple-600 text-2xl" />
                             </div>
-                            <h3 className="text-lg font-semibold text-gray-800 group-hover:text-purple-600 transition-colors">
-                                Emprunts
+                            <h3 className="text-lg font-semibold group-hover:text-purple-600 transition-colors">
+                                Loan
                             </h3>
-                            <p className="text-sm text-gray-500">Emprunts list</p>
+                            <p className="text-sm text-gray-400">Loan list</p>
                         </div>
                     </div>
                     <div className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-all duration-300
@@ -143,7 +142,7 @@ const Navigation = () => {
                             <div className="p-3 bg-orange-50 rounded-full group-hover:bg-orange-100 transition-colors">
                                 <IoHelp className="text-orange-600 text-2xl" />
                             </div>
-                            <h3 className="text-lg font-semibold text-gray-800 group-hover:text-orange-600 transition-colors">
+                            <h3 className="text-lg font-semibold group-hover:text-orange-400 transition-colors">
                                 Aide
                             </h3>
                             <p className="text-sm text-gray-500">Documentation</p>

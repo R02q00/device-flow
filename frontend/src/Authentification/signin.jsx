@@ -5,7 +5,6 @@ import { api } from "../configApi/configs";
 import {MdDeviceHub} from "react-icons/md";
 import loginImage from '../assets/photo.png';
 
-
 export default function Signin() {
     const navigate = useNavigate();
     const [data, setData] = useState({
@@ -27,6 +26,7 @@ export default function Signin() {
             await api.post("/api/auth/signin", data)
                 .then(result => {
                     localStorage.setItem("token", result.data.accessToken);
+                    localStorage.setItem("email", result.data.email);
                     navigate('/home');
                 })
                 .catch(error =>{
@@ -48,12 +48,12 @@ export default function Signin() {
                     </div>
                     <div className="md:w-1/2 p-8 space-y-8">
                     <div className="text-center">
-                        <h2 className="text-2xl font-extrabold text-gray-900">Log in</h2>
+                        <h2 className="text-2xl font-bold text-gray-900">Log in</h2>
                     </div>
                     <form onSubmit={handleSubmit}>
                         {/*Username*/}
                         <div className="mb-4">
-                            <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="username" className="text-sm font-medium mb-1 ">
                                 Username
                             </label>
                             <input
@@ -62,15 +62,14 @@ export default function Signin() {
                                 name="username"
                                 value={data.username}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md
-                                focus:outline-none "
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none "
                             />
                             {errors.username && <span className="text-sm text-red-400">{errors.username}</span>}
                         </div>
                         
                         {/* Password*/}
                         <div className="mb-2">
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="password" className="text-sm font-medium mb-1">
                                 Password
                             </label>
                                 <input
@@ -79,8 +78,7 @@ export default function Signin() {
                                     name="password"
                                     value={data.password}
                                     onChange={handleChange}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md
-                                    focus:outline-none "
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none"
                                 />
                             {errors.password && <span className="text-sm text-red-400">{errors.password}</span>}
                         </div>
@@ -90,7 +88,7 @@ export default function Signin() {
                                 id="showPassword"
                                 onClick={() => setShowPassword(!showPassword)}
                             />
-                            <label htmlFor="showPassword" className="text-sm text-gray-600 hover:text-gray-800 cursor-pointer">
+                            <label htmlFor="showPassword" className="text-sm hover:text-gray-800 cursor-pointer">
                                 Afficher mot de passe ?
                             </label>
                         </div>
@@ -104,7 +102,7 @@ export default function Signin() {
                         </button>
 
                     </form>
-                    <p className="text-sm text-gray-500 mt-4">
+                    <p className="text-sm text-gray-500 mt-4 text-gray-500">
                         Don't have a account ?
                         <button
                             className="text-blue-500 text-sm ml-1 cursor-pointer"

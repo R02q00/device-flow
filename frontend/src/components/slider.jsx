@@ -98,13 +98,13 @@ const Slider = ({ mode, close, ref, isOpen }) => {
         <div className="fixed inset-0 flex">
             <div className="fixed inset-0 bg-gray-600 opacity-50" ></div>
             <div className={`ml-auto bg-white w-80 h-full shadow-lg rounded-sm ${isOpen ? 'slide-in' : 'slide-out'}`}>
-                <div className='flex justify-end px-2 py-1 font-semibold'>
-                    <button className='btn btn-xs' onClick={close}>x</button>
+                <div className='flex justify-end px-2 py-1'>
+                    <button className='btn btn-xs border-0' onClick={close}>x</button>
                 </div>
-                <h3 className='text-md font-semibold text-indigo-500 px-4 mb-2'>{mode === 'new' ? 'New Emprunts' : 'Edit Emprunts'}</h3>
+                <h3 className='text-md font-semibold text-indigo-500 px-2 mb-2'>{mode === 'new' ? 'New Emprunts' : 'Edit Emprunts'}</h3>
                 <form onSubmit={handleSubmit} className="relative overflow-hidden h-[100%]">
                     {/* 01 */}
-                    <div className={next ? 'absolute left-2 px-2 duration-200' : 'absolute left-[-450px] duration-200'}>
+                    <div className={next ? 'absolute w-78 left-2 duration-200' : 'absolute left-[-450px] duration-200'}>
                         <div className="flex flex-col mb-3">
                             <label htmlFor="loaner" className='text-sm text-gray-700'>Loaner name:</label>
                             <input type="text" name="loaner" className="w-full border border-indigo-500 rounded-sm p-1 focus:outline-none"
@@ -143,7 +143,7 @@ const Slider = ({ mode, close, ref, isOpen }) => {
                             tools.length === 0 ? <span>No device avalaible</span> :
                                 tools.map((value) => (
                                     <div key={value.id} className='flex gap-3 mb-2' >
-                                        <input type="checkbox" className='checkbox w-5 h-5'
+                                        <input type="checkbox" className='checkbox w-5 h-5 border border-gray-300 rounded-sm'
                                             value={value.id}
                                             checked={selectedIds.includes(value.id)}
                                             onChange={() => handleChecked(value.id)}

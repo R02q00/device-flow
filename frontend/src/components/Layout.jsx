@@ -6,14 +6,14 @@ import Navigation from "./navigation.jsx";
 
 const Layout = () => {
     const navigate = useNavigate();
-    const [tokenStatus, setTokenStatus]= useState(false);
+    const [tokenStatus, setTokenStatus] = useState(false);
     const token = localStorage.getItem("token");
-    const getAcces = async() =>{
+    const getAcces = async () => {
         await api.get("/api/test/admin", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                }
-            })
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
             .then(result => {
                 console.log(result.data)
                 setTokenStatus(!tokenStatus);
@@ -24,17 +24,17 @@ const Layout = () => {
                 navigate('/')
             })
     }
-    useEffect(()=>{
+    useEffect(() => {
         getAcces();
-        
+
     }, [])
 
-    return(
+    return (
         <>
             {
-                tokenStatus ? <Navigation/>  : navigate('/home')
+                tokenStatus ? <Navigation /> : (navigate('/home'))
             }
-        </> 
+        </>
     )
 }
 export default Layout

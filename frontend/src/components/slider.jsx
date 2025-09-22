@@ -95,8 +95,8 @@ const Slider = ({ mode, close, ref, isOpen }) => {
     }, [ref])
 
     return (
-        <div className="fixed inset-0 flex">
-            <div className="fixed inset-0 bg-gray-600 opacity-50" ></div>
+        <div className="fixed inset-0">
+            <div className="fixed inset-0 bg-gray-600 opacity-50"></div>
             <div className={`ml-auto bg-white w-80 h-full shadow-lg rounded-sm ${isOpen ? 'slide-in' : 'slide-out'}`}>
                 <div className='flex justify-end px-2 py-1'>
                     <button className='btn btn-xs border-0' onClick={close}>x</button>
